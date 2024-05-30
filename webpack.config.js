@@ -27,6 +27,10 @@ module.exports = (env, argv) => {
                         'sass-loader',
                     ],
                 },
+                {
+                    test: /\.(json|geojson)$/,
+                    type: 'json',
+                },
             ],
         },
         output: {
