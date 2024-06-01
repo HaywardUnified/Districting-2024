@@ -46,6 +46,8 @@ function generateGeoLayers(features) {
 >>>>>>> 8da21c5 (tool tip and colors)
 /* Load Map */
 const map = leaf.map('map').setView(STARTING_COORDINATES, 12);
+const geoFeatureCollections = loadFiles();
+const mapLayerGroup = leaf.layerGroup(geoFeatureCollections);
 
 leaf.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 >>>>>>> b6b6b0b (populate map)
@@ -56,6 +58,7 @@ leaf.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 const geojsonFeatures = loadFiles();
@@ -69,12 +72,20 @@ console.log(geoFeatures);
 =======
 const geoFeatureCollections = loadFiles();
 
+=======
+>>>>>>> 151c39a (layergroup)
 // Apply feature options and styling
 geoFeatureCollections.forEach((collection) => {
     applyFeatureOptions(collection.features).addTo(map);
+
+    console.log(collection);
 });
 
-console.log(geoFeatureCollections);
+mapLayerGroup.getLayers().forEach((layer) => {
+    layer.features.forEach((feature) => {
+        leaf.geoJSON(feature);
+    });
+});
 
 /**
  * Load and convert .geojson files to Geo Feature Collections
