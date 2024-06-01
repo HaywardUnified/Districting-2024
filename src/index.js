@@ -6,6 +6,8 @@ const STARTING_COORDINATES = [37.6688, -122.081];
 
 /* Load Map */
 const map = leaf.map('map').setView(STARTING_COORDINATES, 12);
+const geoFeatureCollections = loadFiles();
+const mapLayerGroup = leaf.layerGroup(geoFeatureCollections);
 
 leaf.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -13,14 +15,18 @@ leaf.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-const geoFeatureCollections = loadFiles();
-
 // Apply feature options and styling
 geoFeatureCollections.forEach((collection) => {
     applyFeatureOptions(collection.features).addTo(map);
+
+    console.log(collection);
 });
 
-console.log(geoFeatureCollections);
+mapLayerGroup.getLayers().forEach((layer) => {
+    layer.features.forEach((feature) => {
+        leaf.geoJSON(feature);
+    });
+});
 
 /**
  * Load and convert .geojson files to Geo Feature Collections
