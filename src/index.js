@@ -4,6 +4,7 @@ import '../node_modules/leaflet/dist/leaflet.css';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 const map = leaf.map('map').setView([37.656, -122.093], 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 =======
@@ -30,16 +31,37 @@ const googleSatellite = leaf.tileLayer(
         maxZoom: 19,
     }
 );
+=======
+const STARTING_COORDINATES = [37.63837551672515, -122.09706577524128];
+>>>>>>> 2330c72 (map and region controls)
 
+// Map tiles
 const baseLayers = {
-    Digital: osm,
-    Hybrid: googleHybrid,
-    Satellite: googleSatellite,
+    Digital: leaf.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:
+            '&copy; <a target="_blank" href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19,
+    }),
+    Hybrid: leaf.tileLayer(
+        'https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+        {
+            attribution:
+                '&copy; <a target="_blank" href="https://policies.google.com/">Google</a>',
+            maxZoom: 19,
+        }
+    ),
+    Satellite: leaf.tileLayer(
+        'https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+        {
+            attribution:
+                '&copy; <a target="_blank" href="https://policies.google.com/">Google</a>',
+            maxZoom: 19,
+            minZoom: 10,
+        }
+    ),
 };
-const geoFeatureCollections = loadFiles(); // All available geoJSON files
-const mapOverlayLayers = {};
-const overlays = {};
 
+<<<<<<< HEAD
 //
 geoFeatureCollections.forEach((collection) => {
     // convert feature collections to geoJSON objects
@@ -119,25 +141,55 @@ geoFeatureCollections.forEach((collection) => {
 
     console.log(collection);
 =======
+=======
+// Load Map
+>>>>>>> 2330c72 (map and region controls)
 const map = leaf.map('map', {
     center: STARTING_COORDINATES,
-    layers: [googleHybrid],
+    layers: [baseLayers['Hybrid']],
     zoom: 12,
 >>>>>>> a02c6f9 (base layers and overlays)
 });
 
-const baseOverlayControls = createControls(baseLayers, overlays);
-const mapOverlayControls = createControls(mapOverlayLayers, null, {
+// Load and process data
+const geoFeatureCollections = loadFiles(); // All available geoJSON files
+const mapBaseOverlays = generateMapBaseOverlays(geoFeatureCollections);
+/* const regionLabelOverlays; */
+
+// Insert map controls
+const baseLayerControls = createControls(baseLayers, null);
+const mapOverlayControls = createControls(mapBaseOverlays, null, {
     collapsed: false,
 });
 
+/* const regionLabelControls = createControls();
+const demographicControls = createControls(); */
+
 console.log(geoFeatureCollections);
-console.log(overlays);
+
+function generateOverlays() {}
 
 /**
- * Create a layer control to store base layers and overlays.
- * @param {*} baseLayers - tile layers (ie. maps)
- * @param {*} overlays - stuff that goes over base layers (ie. markers, features)
+ * Convert feature collections into layer groups
+ * @param {*} collections - array of feature collections (each feature collection contains an array of features/layers)
+ * @return - object containing geoJSON map overlays
+ */
+function generateMapBaseOverlays(collections) {
+    const overlays = {};
+
+    collections.forEach((collection) => {
+        const geoJSONobj = applyFeatureOptions(collection.features);
+        const layerGroup = leaf.layerGroup([geoJSONobj]);
+        overlays[`${collection.name}`] = layerGroup;
+    });
+
+    return overlays;
+}
+
+/**
+ * Create a control layer to store base layers and overlays.
+ * @param {*} baseLayers - tile layers (ie. maps); radio buttons
+ * @param {*} overlays - stuff that goes over base layers (ie. markers); checkboxes
  * @return {object} layerControl
  */
 function createControls(baseLayers, overlays, options) {
@@ -145,7 +197,7 @@ function createControls(baseLayers, overlays, options) {
 }
 
 /**
- * Load and convert .geojson files to Geo Feature Collections
+ * Load and convert .geojson files to geo Feature Collections
  * @returns - object containing geo feature collection
  */
 function loadFiles() {
@@ -166,20 +218,22 @@ function loadFiles() {
 }
 
 /**
- * Apply options to geo features
+ * Apply options to geo features.
  * @param {array} features - array of geo features
  */
 function applyFeatureOptions(features) {
     return leaf.geoJSON(features, {
-        onEachFeature: (feature, layer) => {
-            layer.bindTooltip(feature.properties.DistrictName);
-        },
         style: styleFeature,
+        onEachFeature: hoverPopUp,
     });
 }
 <<<<<<< HEAD
 >>>>>>> 8da21c5 (tool tip and colors)
 =======
+
+function hoverPopUp(feature, layer) {
+    layer.bindTooltip(feature.properties.DistrictName);
+}
 
 function styleFeature(feature) {
     let color;

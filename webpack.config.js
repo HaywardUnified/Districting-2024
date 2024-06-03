@@ -1,8 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 <<<<<<< HEAD
+<<<<<<< HEAD
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 =======
 >>>>>>> a30a21f (init and map)
+=======
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+>>>>>>> 2330c72 (map and region controls)
 const path = require('path');
 
 module.exports = (env, argv) => {
@@ -61,9 +65,13 @@ module.exports = (env, argv) => {
                 template: './src/template.html',
             }),
 <<<<<<< HEAD
+<<<<<<< HEAD
             new MiniCssExtractPlugin(),
 =======
 >>>>>>> a30a21f (init and map)
+=======
+            new MiniCssExtractPlugin(),
+>>>>>>> 2330c72 (map and region controls)
         ],
     };
 };
