@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = (env, argv) => {
@@ -42,6 +43,7 @@ module.exports = (env, argv) => {
                 title: 'HUSD Districting Map Viewer',
                 template: './src/template.html',
             }),
+            new MiniCssExtractPlugin(),
         ],
     };
 };
