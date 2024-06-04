@@ -30,13 +30,6 @@ const baseLayers = {
     ),
 };
 
-// Load Map
-const map = leaf.map('map', {
-    center: STARTING_COORDINATES,
-    layers: [baseLayers['Hybrid']],
-    zoom: 12,
-});
-
 // Load and process data
 const geoFeatureCollections = loadFiles(); // All available geoJSON files
 const mapBaseOverlays = generateMapBaseOverlays(geoFeatureCollections);
@@ -50,6 +43,13 @@ const mapOverlayControls = createControls(mapBaseOverlays, null, {
 
 /* const regionLabelControls = createControls();
 const demographicControls = createControls(); */
+
+// Load Map
+const map = leaf.map('map', {
+    center: STARTING_COORDINATES,
+    layers: [baseLayers['Hybrid'], mapBaseOverlays['Draft A']],
+    zoom: 12,
+});
 
 console.log(geoFeatureCollections);
 
