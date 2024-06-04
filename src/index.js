@@ -45,10 +45,12 @@ const map = leaf.map('map', {
 });
 
 // Insert map controls
-const baseLayerControls = createControls(baseLayers);
+const baseLayerControls = createControls(baseLayers).setPosition('bottomleft');
 const mapOverlayControls = createControls(mapBaseOverlays, null, {
     collapsed: false,
-});
+}).setPosition('topleft');
+const labelOverlayControls =
+    createControls(mapLabelOverlays).setPosition('topleft');
 
 /* const regionLabelControls = createControls();
 const demographicControls = createControls(); */
