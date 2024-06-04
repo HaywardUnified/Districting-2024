@@ -32,18 +32,20 @@ const baseLayers = {
 
 // Load and process data
 const geoFeatureCollections = loadFiles(); // All available geoJSON files
-const mapBaseOverlays = generateMapBaseOverlays(geoFeatureCollections);
-/* const regionLabelOverlays; */
+const mapBaseOverlays = insertNoneLayer(
+    generateMapOverlays(geoFeatureCollections)
+);
+const mapLabelOverlays = generateLabelOverlays(geoFeatureCollections);
 
 // Load Map
 const map = leaf.map('map', {
     center: STARTING_COORDINATES,
-    layers: [baseLayers['Hybrid'], mapBaseOverlays['Draft A']],
+    layers: [baseLayers['Digital'], mapBaseOverlays['Draft A']],
     zoom: 12,
 });
 
 // Insert map controls
-const baseLayerControls = createControls(baseLayers, null);
+const baseLayerControls = createControls(baseLayers);
 const mapOverlayControls = createControls(mapBaseOverlays, null, {
     collapsed: false,
 });
@@ -53,14 +55,24 @@ const demographicControls = createControls(); */
 
 console.log(geoFeatureCollections);
 
-function generateOverlays() {}
+function generateLabelOverlays(collections) {
+    let labels = {};
+
+    for (let collection of collections) {
+    }
+}
+
+function insertNoneLayer(collection) {
+    collection['None'] = leaf.layerGroup();
+    return collection;
+}
 
 /**
  * Convert feature collections into layer groups
  * @param {*} collections - array of feature collections (each feature collection contains an array of features/layers)
  * @return - object containing geoJSON map overlays
  */
-function generateMapBaseOverlays(collections) {
+function generateMapOverlays(collections) {
     const overlays = {};
 
     collections.forEach((collection) => {
