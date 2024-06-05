@@ -6,22 +6,7 @@ module.exports = (env, argv) => {
     const production = argv.mode === 'production';
 
     return {
-<<<<<<< HEAD
-<<<<<<< HEAD
         entry: './src/scripts/index.js',
-        module: {
-            rules: [
-                {
-                    test: /\.(png|jpg|gif)$/i,
-                    type: 'asset/resource',
-                },
-                {
-<<<<<<< HEAD
-=======
-        entry: './src/index.js',
-=======
-        entry: './src/scripts/index.js',
->>>>>>> d537c09 (hover effects)
         module: {
             rules: [
                 {
