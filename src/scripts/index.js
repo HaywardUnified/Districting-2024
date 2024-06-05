@@ -156,9 +156,9 @@ function applyFeatureOptions(geojson) {
         layer.setStyle({
             color: 'black',
             fillColor: layer.options.color,
-            weight: 4,
+            weight: 5,
             dashArray: '',
-            fillOpacity: 0.6,
+            fillOpacity: 0.7,
         });
 
         layer.bringToFront();
@@ -208,5 +208,6 @@ function styleFeature(feature) {
     return {
         color,
         dashArray: '5',
+        fillOpacity: 0.3,
     };
 }
