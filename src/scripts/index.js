@@ -101,6 +101,27 @@ const baseLayerControls = createControls(baseLayers).setPosition('bottomleft');
 const mapOverlayControls = createControls(mapBaseOverlays, null, {
     collapsed: false,
 }).setPosition('topleft');
+const hoverInfoBox = createHoverInfoBox().addTo(map);
+
+function createHoverInfoBox() {
+    const box = leaf.control();
+
+    box.onAdd = function (map) {
+        this._div = leaf.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+
+    box.update = function (props) {
+        this._div.innerHTML =
+            '<div class="title">Regional Demographics</h4> <br>' +
+            (props
+                ? '<b>' + props.name + '</b><br />' + props.density
+                : 'Hover over a region');
+    };
+
+    return box;
+}
 /* const labelOverlayControls =
     createControls(mapLabelOverlays).setPosition('topleft'); */
 
@@ -334,12 +355,22 @@ function applyFeatureOptions(geojson) {
             fillOpacity: 0.4,
         });
 
+        layer
+            .bindTooltip(e.target.feature.properties.DistrictName)
+            .openTooltip();
+
         layer.bringToFront();
+<<<<<<< HEAD
 >>>>>>> 4660563 (hover interactivity)
+=======
+
+        hoverInfoBox.update(layer.feature.properties);
+>>>>>>> 6b513e6 (hover div)
     }
 
     function resetHighlight(e) {
         geojsonLayer.resetStyle(e.target);
+<<<<<<< HEAD
 <<<<<<< HEAD
         hoverInfoBox.update();
     }
@@ -349,6 +380,9 @@ function applyFeatureOptions(geojson) {
         map.panTo(layer.getCenter());
         hoverInfoBox.update(layer.feature.properties); // applies to mobile click
 =======
+=======
+        hoverInfoBox.update();
+>>>>>>> 6b513e6 (hover div)
     }
 
     function zoomToFeature(e) {
@@ -360,12 +394,15 @@ function applyFeatureOptions(geojson) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 function hoverPopUp(feature, layer) {
     layer.bindTooltip(feature.properties.DistrictName);
 }
 
 >>>>>>> 4660563 (hover interactivity)
+=======
+>>>>>>> 6b513e6 (hover div)
 function styleFeature(feature) {
     let color;
 
