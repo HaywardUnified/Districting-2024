@@ -22,6 +22,27 @@ const baseLayerControls = createControls(baseLayers).setPosition('bottomleft');
 const mapOverlayControls = createControls(mapBaseOverlays, null, {
     collapsed: false,
 }).setPosition('topleft');
+const hoverInfoBox = createHoverInfoBox().addTo(map);
+
+function createHoverInfoBox() {
+    const box = leaf.control();
+
+    box.onAdd = function (map) {
+        this._div = leaf.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+
+    box.update = function (props) {
+        this._div.innerHTML =
+            '<div class="title">Regional Demographics</h4> <br>' +
+            (props
+                ? '<b>' + props.name + '</b><br />' + props.density
+                : 'Hover over a region');
+    };
+
+    return box;
+}
 /* const labelOverlayControls =
     createControls(mapLabelOverlays).setPosition('topleft'); */
 
@@ -108,11 +129,18 @@ function applyFeatureOptions(geojson) {
             fillOpacity: 0.4,
         });
 
+        layer
+            .bindTooltip(e.target.feature.properties.DistrictName)
+            .openTooltip();
+
         layer.bringToFront();
+
+        hoverInfoBox.update(layer.feature.properties);
     }
 
     function resetHighlight(e) {
         geojsonLayer.resetStyle(e.target);
+        hoverInfoBox.update();
     }
 
     function zoomToFeature(e) {
@@ -120,10 +148,6 @@ function applyFeatureOptions(geojson) {
     }
 
     return geojsonLayer;
-}
-
-function hoverPopUp(feature, layer) {
-    layer.bindTooltip(feature.properties.DistrictName);
 }
 
 function styleFeature(feature) {
