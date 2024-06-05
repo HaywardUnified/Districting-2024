@@ -6,7 +6,7 @@ module.exports = (env, argv) => {
     const production = argv.mode === 'production';
 
     return {
-        entry: './src/index.js',
+        entry: './src/scripts/index.js',
         module: {
             rules: [
                 {
