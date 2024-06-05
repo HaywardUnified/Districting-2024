@@ -211,3 +211,5 @@ function styleFeature(feature) {
         fillOpacity: 0.3,
     };
 }
+/* Make hover lines thinner 
+add search bar*/
