@@ -375,6 +375,7 @@ function applyFeatureOptions(geojson) {
 <<<<<<< HEAD
             color: 'black',
             fillColor: layer.options.color,
+<<<<<<< HEAD
             weight: 2,
             dashArray: '',
             fillOpacity: 0.7,
@@ -389,8 +390,11 @@ function applyFeatureOptions(geojson) {
             fillColor: layer.options.color,
 >>>>>>> 3616c9b (hover interactivity and demographics)
             weight: 4,
+=======
+            weight: 5,
+>>>>>>> 4b0eca6 (style)
             dashArray: '',
-            fillOpacity: 0.6,
+            fillOpacity: 0.7,
         });
 
         layer.bringToFront();
@@ -504,6 +508,7 @@ function styleFeature(feature) {
     return {
         color,
         dashArray: '5',
+        fillOpacity: 0.3,
     };
 }
 >>>>>>> 4660563 (hover interactivity)
