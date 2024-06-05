@@ -511,4 +511,9 @@ function styleFeature(feature) {
         fillOpacity: 0.3,
     };
 }
+<<<<<<< HEAD
 >>>>>>> 4660563 (hover interactivity)
+=======
+/* Make hover lines thinner 
+add search bar*/
+>>>>>>> 9288d5c (notes)
