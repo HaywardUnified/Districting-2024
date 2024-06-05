@@ -114,10 +114,29 @@ function createHoverInfoBox() {
 
     box.update = function (props) {
         this._div.innerHTML =
-            '<div class="title">Regional Demographics</h4> <br>' +
+            `<div class='title'>Regional Demographics</div>` +
             (props
-                ? '<b>' + props.name + '</b><br />' + props.density
-                : 'Hover over a region');
+                ? `
+<div class='data'>
+    <div class='district'>District: ${props.DistrictName}</div>
+    <div>Total Population: ${props['Population']}</div>
+    <div class='population'>
+        <div>Asian (${props['PercentAsian']}%): ${props['DOJ_NH_Asn']}</div>
+        <div>Black (${props['PercentBlack']}%): ${props['DOJ_NH_Blk']}</div>
+        <div>Latino (${props['PercentLatinoPop']}%): ${props['Hispanic Origin']}</div>
+        <div>White (${props['PercentWhitePop']}%): ${props['NH_Wht']}</div>
+        <div class='remaining'>
+            <div>Remaining Population (${props['PercentMMR']}%):</div>
+            <div class='populationValues'>
+               <div>Native American: ${props['DOJ_NH_Ind']}</div>
+               <div>Hawaiian/Pacific Islander: ${props['DOJ_NH_Hwn']}</div>
+               <div>Other: ${props['DOJ_NH_Oth']}</div>
+               <div>Other Mixed Race: ${props['DOJ_NH_OthMR']}</div>
+            </div>
+        </div>
+    </div>
+</div>`
+                : `<div>Hover over a region</div>`);
     };
 
     return box;
@@ -330,7 +349,21 @@ function applyFeatureOptions(geojson) {
 =======
                 click: zoomToFeature,
             });
+<<<<<<< HEAD
 >>>>>>> 4660563 (hover interactivity)
+=======
+
+            const districtLabel = leaf
+                .tooltip({
+                    className: 'districtLabel',
+                    content: feature.properties.DistrictName,
+                    direction: 'center',
+                    permanent: true,
+                })
+                .openTooltip();
+
+            layer.bindTooltip(districtLabel);
+>>>>>>> 3616c9b (hover interactivity and demographics)
         },
     });
 
@@ -338,6 +371,7 @@ function applyFeatureOptions(geojson) {
         const layer = e.target;
 
         layer.setStyle({
+<<<<<<< HEAD
 <<<<<<< HEAD
             color: 'black',
             fillColor: layer.options.color,
@@ -350,14 +384,14 @@ function applyFeatureOptions(geojson) {
 
         hoverInfoBox.update(layer.feature.properties);
 =======
+=======
+            color: 'black',
+            fillColor: layer.options.color,
+>>>>>>> 3616c9b (hover interactivity and demographics)
             weight: 4,
             dashArray: '',
-            fillOpacity: 0.4,
+            fillOpacity: 0.6,
         });
-
-        layer
-            .bindTooltip(e.target.feature.properties.DistrictName)
-            .openTooltip();
 
         layer.bringToFront();
 <<<<<<< HEAD
@@ -445,12 +479,16 @@ function styleFeature(feature) {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3616c9b (hover interactivity and demographics)
     const districtLabel = leaf
         .tooltip({
             permanent: true,
         })
         .openTooltip();
 
+<<<<<<< HEAD
     return {
         color,
         dashArray: '5',
@@ -461,6 +499,8 @@ function styleFeature(feature) {
 =======
 >>>>>>> d537c09 (hover effects)
 =======
+=======
+>>>>>>> 3616c9b (hover interactivity and demographics)
     return {
         color,
         dashArray: '5',
