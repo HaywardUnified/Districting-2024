@@ -14,6 +14,7 @@ module.exports = (env, argv) => {
 
     return {
 <<<<<<< HEAD
+<<<<<<< HEAD
         entry: './src/scripts/index.js',
         module: {
             rules: [
@@ -24,6 +25,9 @@ module.exports = (env, argv) => {
                 {
 =======
         entry: './src/index.js',
+=======
+        entry: './src/scripts/index.js',
+>>>>>>> d537c09 (hover effects)
         module: {
             rules: [
                 {

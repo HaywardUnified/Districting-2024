@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
 
 New Map Instructions:
@@ -12,24 +13,44 @@ import greenMarker from '../style/icons/green_marker.png';
 import yellowMarker from '../style/icons/yellow_marker.png';
 import redMarker from '../style/icons/red_marker.png';
 import markerShadow from '../style/icons/marker-shadow.png';
+=======
+import '../style/style.scss';
+>>>>>>> d537c09 (hover effects)
 import '../../node_modules/leaflet/dist/leaflet.css';
 
 import baseLayers from './baseLayers';
 import leaf from 'leaflet';
+<<<<<<< HEAD
 
 const STARTING_COORDINATES = [37.63837551672515, -122.09706577524128];
 // Load and process data
 const mapBaseLayers = insertNoneLayer(generateMapLayers(loadBaseLayers()));
 const overlayCollection = generateOverlays(loadOverlays());
+=======
+import { insertNoneLayer, generateMapOverlays } from './overlays';
+
+const STARTING_COORDINATES = [37.63837551672515, -122.09706577524128];
+
+// Load and process data
+const geoFeatureCollections = loadFiles(); // All available geoJSON files
+const mapBaseOverlays = insertNoneLayer(
+    generateMapOverlays(geoFeatureCollections)
+);
+>>>>>>> d537c09 (hover effects)
 
 // Load Map
 const map = leaf.map('map', {
     center: STARTING_COORDINATES,
+<<<<<<< HEAD
     layers: [baseLayers['Digital'], mapBaseLayers['Modified Final Map A']],
+=======
+    layers: [baseLayers['Digital'], mapBaseOverlays['Draft A']],
+>>>>>>> d537c09 (hover effects)
     zoom: 12,
 });
 
 // Insert map controls
+<<<<<<< HEAD
 const mapControls = createControls(baseLayers).setPosition('bottomleft');
 const baseLayerControls = createControls(mapBaseLayers, overlayCollection, {
     collapsed: false,
@@ -74,6 +95,19 @@ function createHoverInfoBox() {
 
     return box;
 }
+=======
+const baseLayerControls = createControls(baseLayers).setPosition('bottomleft');
+const mapOverlayControls = createControls(mapBaseOverlays, null, {
+    collapsed: false,
+}).setPosition('topleft');
+const labelOverlayControls =
+    createControls(mapLabelOverlays).setPosition('topleft');
+
+/* const regionLabelControls = createControls();
+const demographicControls = createControls(); */
+
+console.log(geoFeatureCollections);
+>>>>>>> d537c09 (hover effects)
 
 /**
  * Create a control layer to store base layers and overlays.
@@ -89,12 +123,17 @@ function createControls(baseLayers, overlays, options) {
  * Load and convert .geojson files to geo Feature Collections
  * @returns - object containing geo feature collection
  */
+<<<<<<< HEAD
 function loadBaseLayers() {
     const context = require.context(
         '../datafiles/baseLayers',
         true,
         /\.geojson$/
     );
+=======
+function loadFiles() {
+    const context = require.context('../datafiles/', true, /\.geojson$/);
+>>>>>>> d537c09 (hover effects)
     const files = [];
 
     context.keys().forEach((key) => {
@@ -109,6 +148,7 @@ function loadBaseLayers() {
 
     return files;
 }
+<<<<<<< HEAD
 
 /**
  * Load and convert .geojson files to geo Feature Collections
@@ -326,3 +366,5 @@ function styleFeature(feature) {
         weight: 2,
     };
 }
+=======
+>>>>>>> d537c09 (hover effects)
