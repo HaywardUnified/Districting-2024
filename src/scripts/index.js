@@ -21,6 +21,7 @@ import '../../node_modules/leaflet/dist/leaflet.css';
 import baseLayers from './baseLayers';
 import leaf from 'leaflet';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 const STARTING_COORDINATES = [37.63837551672515, -122.09706577524128];
 // Load and process data
@@ -28,9 +29,10 @@ const mapBaseLayers = insertNoneLayer(generateMapLayers(loadBaseLayers()));
 const overlayCollection = generateOverlays(loadOverlays());
 =======
 import { insertNoneLayer, generateMapOverlays } from './overlays';
+=======
+>>>>>>> 4660563 (hover interactivity)
 
 const STARTING_COORDINATES = [37.63837551672515, -122.09706577524128];
-
 // Load and process data
 const geoFeatureCollections = loadFiles(); // All available geoJSON files
 const mapBaseOverlays = insertNoneLayer(
@@ -48,7 +50,6 @@ const map = leaf.map('map', {
 >>>>>>> d537c09 (hover effects)
     zoom: 12,
 });
-
 // Insert map controls
 <<<<<<< HEAD
 const mapControls = createControls(baseLayers).setPosition('bottomleft');
@@ -100,8 +101,8 @@ const baseLayerControls = createControls(baseLayers).setPosition('bottomleft');
 const mapOverlayControls = createControls(mapBaseOverlays, null, {
     collapsed: false,
 }).setPosition('topleft');
-const labelOverlayControls =
-    createControls(mapLabelOverlays).setPosition('topleft');
+/* const labelOverlayControls =
+    createControls(mapLabelOverlays).setPosition('topleft'); */
 
 /* const regionLabelControls = createControls();
 const demographicControls = createControls(); */
@@ -149,6 +150,7 @@ function loadFiles() {
     return files;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /**
  * Load and convert .geojson files to geo Feature Collections
@@ -174,6 +176,8 @@ function loadOverlays() {
 
     return files;
 }
+=======
+>>>>>>> 4660563 (hover interactivity)
 
 function insertNoneLayer(collection) {
     collection['None'] = leaf.layerGroup();
@@ -185,7 +189,11 @@ function insertNoneLayer(collection) {
  * @param {*} collections - array of feature collections (each feature collection contains an array of features/layers)
  * @return - object containing geoJSON map overlays
  */
+<<<<<<< HEAD
 function generateMapLayers(collections) {
+=======
+function generateMapOverlays(collections) {
+>>>>>>> 4660563 (hover interactivity)
     const overlays = {};
 
     collections.forEach((collection) => {
@@ -197,6 +205,7 @@ function generateMapLayers(collections) {
     return overlays;
 }
 
+<<<<<<< HEAD
 function generateOverlays(collections) {
     const markers = [];
 
@@ -270,6 +279,8 @@ function markerOptions(marker) {
     };
 }
 
+=======
+>>>>>>> 4660563 (hover interactivity)
 /**
  * Apply options to a geoJSON object.
  * @param {array} geojson
@@ -281,6 +292,7 @@ function applyFeatureOptions(geojson) {
             layer.on({
                 mouseover: highlightFeature,
                 mouseout: resetHighlight,
+<<<<<<< HEAD
                 click: mouseClick,
             });
 
@@ -294,6 +306,10 @@ function applyFeatureOptions(geojson) {
                 .openTooltip();
 
             layer.bindTooltip(districtLabel);
+=======
+                click: zoomToFeature,
+            });
+>>>>>>> 4660563 (hover interactivity)
         },
     });
 
@@ -301,6 +317,7 @@ function applyFeatureOptions(geojson) {
         const layer = e.target;
 
         layer.setStyle({
+<<<<<<< HEAD
             color: 'black',
             fillColor: layer.options.color,
             weight: 2,
@@ -311,10 +328,19 @@ function applyFeatureOptions(geojson) {
         layer.bringToFront();
 
         hoverInfoBox.update(layer.feature.properties);
+=======
+            weight: 4,
+            dashArray: '',
+            fillOpacity: 0.4,
+        });
+
+        layer.bringToFront();
+>>>>>>> 4660563 (hover interactivity)
     }
 
     function resetHighlight(e) {
         geojsonLayer.resetStyle(e.target);
+<<<<<<< HEAD
         hoverInfoBox.update();
     }
 
@@ -322,16 +348,30 @@ function applyFeatureOptions(geojson) {
         const layer = e.target;
         map.panTo(layer.getCenter());
         hoverInfoBox.update(layer.feature.properties); // applies to mobile click
+=======
+    }
+
+    function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+>>>>>>> 4660563 (hover interactivity)
     }
 
     return geojsonLayer;
 }
 
+<<<<<<< HEAD
+=======
+function hoverPopUp(feature, layer) {
+    layer.bindTooltip(feature.properties.DistrictName);
+}
+
+>>>>>>> 4660563 (hover interactivity)
 function styleFeature(feature) {
     let color;
 
     switch (feature.properties.DistrictName) {
         case 'A':
+<<<<<<< HEAD
         case '1':
             color = '#003049';
             break;
@@ -349,10 +389,25 @@ function styleFeature(feature) {
             break;
         case 'E':
         case '5':
+=======
+            color = '#003049';
+            break;
+        case 'B':
+            color = '#D62828';
+            break;
+        case 'C':
+            color = '#F77F00';
+            break;
+        case 'D':
+            color = '#0f7b0a';
+            break;
+        case 'E':
+>>>>>>> 4660563 (hover interactivity)
             color = '#BC34E6';
             break;
     }
 
+<<<<<<< HEAD
     const districtLabel = leaf
         .tooltip({
             permanent: true,
@@ -368,3 +423,10 @@ function styleFeature(feature) {
 }
 =======
 >>>>>>> d537c09 (hover effects)
+=======
+    return {
+        color,
+        dashArray: '5',
+    };
+}
+>>>>>>> 4660563 (hover interactivity)
