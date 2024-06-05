@@ -35,10 +35,29 @@ function createHoverInfoBox() {
 
     box.update = function (props) {
         this._div.innerHTML =
-            '<div class="title">Regional Demographics</h4> <br>' +
+            `<div class='title'>Regional Demographics</div>` +
             (props
-                ? '<b>' + props.name + '</b><br />' + props.density
-                : 'Hover over a region');
+                ? `
+<div class='data'>
+    <div class='district'>District: ${props.DistrictName}</div>
+    <div>Total Population: ${props['Population']}</div>
+    <div class='population'>
+        <div>Asian (${props['PercentAsian']}%): ${props['DOJ_NH_Asn']}</div>
+        <div>Black (${props['PercentBlack']}%): ${props['DOJ_NH_Blk']}</div>
+        <div>Latino (${props['PercentLatinoPop']}%): ${props['Hispanic Origin']}</div>
+        <div>White (${props['PercentWhitePop']}%): ${props['NH_Wht']}</div>
+        <div class='remaining'>
+            <div>Remaining Population (${props['PercentMMR']}%):</div>
+            <div class='populationValues'>
+               <div>Native American: ${props['DOJ_NH_Ind']}</div>
+               <div>Hawaiian/Pacific Islander: ${props['DOJ_NH_Hwn']}</div>
+               <div>Other: ${props['DOJ_NH_Oth']}</div>
+               <div>Other Mixed Race: ${props['DOJ_NH_OthMR']}</div>
+            </div>
+        </div>
+    </div>
+</div>`
+                : `<div>Hover over a region</div>`);
     };
 
     return box;
@@ -117,6 +136,17 @@ function applyFeatureOptions(geojson) {
                 mouseout: resetHighlight,
                 click: zoomToFeature,
             });
+
+            const districtLabel = leaf
+                .tooltip({
+                    className: 'districtLabel',
+                    content: feature.properties.DistrictName,
+                    direction: 'center',
+                    permanent: true,
+                })
+                .openTooltip();
+
+            layer.bindTooltip(districtLabel);
         },
     });
 
@@ -124,14 +154,12 @@ function applyFeatureOptions(geojson) {
         const layer = e.target;
 
         layer.setStyle({
+            color: 'black',
+            fillColor: layer.options.color,
             weight: 4,
             dashArray: '',
-            fillOpacity: 0.4,
+            fillOpacity: 0.6,
         });
-
-        layer
-            .bindTooltip(e.target.feature.properties.DistrictName)
-            .openTooltip();
 
         layer.bringToFront();
 
@@ -170,6 +198,12 @@ function styleFeature(feature) {
             color = '#BC34E6';
             break;
     }
+
+    const districtLabel = leaf
+        .tooltip({
+            permanent: true,
+        })
+        .openTooltip();
 
     return {
         color,
