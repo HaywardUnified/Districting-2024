@@ -155,14 +155,13 @@ body,
     .data {
         display: flex;
         flex-flow: column nowrap;
-        gap: 5px;
     }
 
     .remaining {
         .populationValues {
             display: flex;
             flex-flow: column nowrap;
-            padding: 0 8px;
+            padding: 0 0 0 10px;
         }
     }
 
