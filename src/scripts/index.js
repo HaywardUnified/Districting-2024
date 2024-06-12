@@ -156,7 +156,7 @@ function applyFeatureOptions(geojson) {
         layer.setStyle({
             color: 'black',
             fillColor: layer.options.color,
-            weight: 5,
+            weight: 2,
             dashArray: '',
             fillOpacity: 0.7,
         });
@@ -209,7 +209,6 @@ function styleFeature(feature) {
         color,
         dashArray: '5',
         fillOpacity: 0.3,
+        weight: 2,
     };
 }
-/* Make hover lines thinner 
-add search bar*/
