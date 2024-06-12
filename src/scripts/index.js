@@ -50,6 +50,7 @@ const map = leaf.map('map', {
 >>>>>>> d537c09 (hover effects)
     zoom: 12,
 });
+
 // Insert map controls
 <<<<<<< HEAD
 const mapControls = createControls(baseLayers).setPosition('bottomleft');
@@ -121,10 +122,10 @@ function createHoverInfoBox() {
     <div class='district'>District: ${props.DistrictName}</div>
     <div>Total Population: ${props['Population']}</div>
     <div class='population'>
-        <div>Asian (${props['PercentAsian']}%): ${props['DOJ_NH_Asn']}</div>
-        <div>Black (${props['PercentBlack']}%): ${props['DOJ_NH_Blk']}</div>
-        <div>Latino (${props['PercentLatinoPop']}%): ${props['Hispanic Origin']}</div>
-        <div>White (${props['PercentWhitePop']}%): ${props['NH_Wht']}</div>
+        <div data-pct=${props['PercentAsian']}>Asian (${props['PercentAsian']}%): ${props['DOJ_NH_Asn']}</div>
+        <div data-pct=${props['PercentBlack']}>Black (${props['PercentBlack']}%): ${props['DOJ_NH_Blk']}</div>
+        <div data-pct=${props['PercentLatinoPop']}>Latino (${props['PercentLatinoPop']}%): ${props['Hispanic Origin']}</div>
+        <div data-pct=${props['PercentWhitePop']}>White (${props['PercentWhitePop']}%): ${props['NH_Wht']}</div>
         <div class='remaining'>
             <div>Remaining Population (${props['PercentMMR']}%):</div>
             <div class='populationValues'>
@@ -137,15 +138,12 @@ function createHoverInfoBox() {
     </div>
 </div>`
                 : `<div>Hover over a region</div>`);
+
+        console.log(this._div);
     };
 
     return box;
 }
-/* const labelOverlayControls =
-    createControls(mapLabelOverlays).setPosition('topleft'); */
-
-/* const regionLabelControls = createControls();
-const demographicControls = createControls(); */
 
 console.log(geoFeatureCollections);
 >>>>>>> d537c09 (hover effects)
@@ -333,6 +331,9 @@ function applyFeatureOptions(geojson) {
                 mouseover: highlightFeature,
                 mouseout: resetHighlight,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c340105 (mobile click)
                 click: mouseClick,
             });
 
@@ -420,6 +421,7 @@ function applyFeatureOptions(geojson) {
         const layer = e.target;
         map.panTo(layer.getCenter());
         hoverInfoBox.update(layer.feature.properties); // applies to mobile click
+<<<<<<< HEAD
 =======
 =======
         hoverInfoBox.update();
@@ -429,6 +431,8 @@ function applyFeatureOptions(geojson) {
     function zoomToFeature(e) {
         map.fitBounds(e.target.getBounds());
 >>>>>>> 4660563 (hover interactivity)
+=======
+>>>>>>> c340105 (mobile click)
     }
 
     return geojsonLayer;
@@ -511,7 +515,7 @@ function styleFeature(feature) {
     return {
         color,
         dashArray: '5',
-        fillOpacity: 0.3,
+        fillOpacity: 0.4,
         weight: 2,
     };
 }
