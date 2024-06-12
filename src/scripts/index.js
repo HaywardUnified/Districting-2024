@@ -376,6 +376,9 @@ function applyFeatureOptions(geojson) {
             color: 'black',
             fillColor: layer.options.color,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1e90a20 (thinner hover borders)
             weight: 2,
             dashArray: '',
             fillOpacity: 0.7,
@@ -509,11 +512,15 @@ function styleFeature(feature) {
         color,
         dashArray: '5',
         fillOpacity: 0.3,
+        weight: 2,
     };
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 4660563 (hover interactivity)
 =======
 /* Make hover lines thinner 
 add search bar*/
 >>>>>>> 9288d5c (notes)
+=======
+>>>>>>> 1e90a20 (thinner hover borders)
