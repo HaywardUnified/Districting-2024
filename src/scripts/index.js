@@ -1,4 +1,9 @@
 import '../style/style.scss';
+import blueMarker from '../style/icons/blue_marker.png';
+import greenMarker from '../style/icons/green_marker.png';
+import yellowMarker from '../style/icons/yellow_marker.png';
+import redMarker from '../style/icons/red_marker.png';
+import markerShadow from '../style/icons/marker-shadow.png';
 import '../../node_modules/leaflet/dist/leaflet.css';
 
 import baseLayers from './baseLayers';
@@ -160,7 +165,13 @@ function generateOverlays(collections) {
     markers.forEach((marker) => {
         const type = marker.School_Typ;
         const coords = marker.latlong.split(',');
-        const pin = leaf.marker(coords, markerOptions(marker));
+        const pin = leaf
+            .marker(coords, markerOptions(marker))
+            .bindTooltip(
+                `${marker.School_Nam} ${
+                    marker.School_Typ === 'Other' ? '' : marker.School_Typ
+                }`
+            );
 
         if (overlays.hasOwnProperty(type)) {
             overlays[type].push(pin);
@@ -179,11 +190,36 @@ function generateOverlays(collections) {
 }
 
 function markerOptions(marker) {
-    console.log(marker);
+    let mapMarker;
+
+    switch (marker.School_Typ) {
+        case 'Elementary School':
+            mapMarker = greenMarker;
+            break;
+        case 'Middle School':
+            mapMarker = yellowMarker;
+            break;
+        case 'High School':
+            mapMarker = redMarker;
+            break;
+        case 'Other':
+            mapMarker = blueMarker;
+            break;
+    }
+    var markerIcon = L.icon({
+        iconUrl: mapMarker,
+        shadowUrl: markerShadow,
+
+        iconSize: [25, 35], // size of the icon
+        iconAnchor: [0, 35], // point of the icon which will correspond to marker's location
+        shadowAnchor: [0, 40],
+        popupAnchor: [0, 0],
+        tooltipAnchor: [0, 0],
+    });
 
     return {
-        
-    }
+        icon: markerIcon,
+    };
 }
 
 /**

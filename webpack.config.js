@@ -10,9 +10,10 @@ module.exports = (env, argv) => {
         module: {
             rules: [
                 {
->>>>>>> a30a21f (init and map)
-=======
->>>>>>> fffa552 (pins)
+                    test: /\.(png|jpg|gif)$/i,
+                    type: 'asset/resource',
+                },
+                {
                     test: /\.css/,
                     use: [
                         production
