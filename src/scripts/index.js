@@ -34,24 +34,34 @@ import { insertNoneLayer, generateMapOverlays } from './overlays';
 
 const STARTING_COORDINATES = [37.63837551672515, -122.09706577524128];
 // Load and process data
+<<<<<<< HEAD
 const geoFeatureCollections = loadFiles(); // All available geoJSON files
 const mapBaseOverlays = insertNoneLayer(
     generateMapOverlays(geoFeatureCollections)
 );
 >>>>>>> d537c09 (hover effects)
+=======
+const mapBaseLayers = insertNoneLayer(generateMapLayers(loadBaseLayers()));
+const overlayCollection = generateOverlays(loadOverlays());
+>>>>>>> 50d46fb (markers)
 
 // Load Map
 const map = leaf.map('map', {
     center: STARTING_COORDINATES,
 <<<<<<< HEAD
+<<<<<<< HEAD
     layers: [baseLayers['Digital'], mapBaseLayers['Modified Final Map A']],
 =======
     layers: [baseLayers['Digital'], mapBaseOverlays['Draft A']],
 >>>>>>> d537c09 (hover effects)
+=======
+    layers: [baseLayers['Digital'], mapBaseLayers['Draft A']],
+>>>>>>> 50d46fb (markers)
     zoom: 12,
 });
 
 // Insert map controls
+<<<<<<< HEAD
 <<<<<<< HEAD
 const mapControls = createControls(baseLayers).setPosition('bottomleft');
 const baseLayerControls = createControls(mapBaseLayers, overlayCollection, {
@@ -100,6 +110,10 @@ function createHoverInfoBox() {
 =======
 const baseLayerControls = createControls(baseLayers).setPosition('bottomleft');
 const mapOverlayControls = createControls(mapBaseOverlays, null, {
+=======
+const mapControls = createControls(baseLayers).setPosition('bottomleft');
+const baseLayerControls = createControls(mapBaseLayers, overlayCollection, {
+>>>>>>> 50d46fb (markers)
     collapsed: false,
 }).setPosition('topleft');
 const hoverInfoBox = createHoverInfoBox().addTo(map);
@@ -138,16 +152,17 @@ function createHoverInfoBox() {
     </div>
 </div>`
                 : `<div>Hover over a region</div>`);
-
-        console.log(this._div);
     };
 
     return box;
 }
 
+<<<<<<< HEAD
 console.log(geoFeatureCollections);
 >>>>>>> d537c09 (hover effects)
 
+=======
+>>>>>>> 50d46fb (markers)
 /**
  * Create a control layer to store base layers and overlays.
  * @param {*} baseLayers - tile layers (ie. maps); radio buttons
@@ -163,16 +178,47 @@ function createControls(baseLayers, overlays, options) {
  * @returns - object containing geo feature collection
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 50d46fb (markers)
 function loadBaseLayers() {
     const context = require.context(
         '../datafiles/baseLayers',
         true,
         /\.geojson$/
     );
+<<<<<<< HEAD
 =======
 function loadFiles() {
     const context = require.context('../datafiles/', true, /\.geojson$/);
 >>>>>>> d537c09 (hover effects)
+=======
+    const files = [];
+
+    context.keys().forEach((key) => {
+        const formattedKey = key
+            .replace('./', '')
+            .replace(/\.(json|geojson)$/, '');
+
+        context(key).name = formattedKey; // Update name data
+
+        files.push(context(key));
+    });
+
+    return files;
+}
+
+/**
+ * Load and convert .geojson files to geo Feature Collections
+ * @returns - object containing geo feature collection
+ */
+function loadOverlays() {
+    const context = require.context(
+        '../datafiles/overlays',
+        true,
+        /\.geojson$/
+    );
+>>>>>>> 50d46fb (markers)
     const files = [];
 
     context.keys().forEach((key) => {
@@ -228,10 +274,14 @@ function insertNoneLayer(collection) {
  * @return - object containing geoJSON map overlays
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 function generateMapLayers(collections) {
 =======
 function generateMapOverlays(collections) {
 >>>>>>> 4660563 (hover interactivity)
+=======
+function generateMapLayers(collections) {
+>>>>>>> 50d46fb (markers)
     const overlays = {};
 
     collections.forEach((collection) => {
@@ -244,6 +294,9 @@ function generateMapOverlays(collections) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 50d46fb (markers)
 function generateOverlays(collections) {
     const markers = [];
 
@@ -260,6 +313,7 @@ function generateOverlays(collections) {
     markers.forEach((marker) => {
         const type = marker.School_Typ;
         const coords = marker.latlong.split(',');
+<<<<<<< HEAD
         const pin = leaf
             .marker(coords, markerOptions(marker))
             .bindTooltip(
@@ -267,6 +321,9 @@ function generateOverlays(collections) {
                     marker.School_Typ === 'Other' ? '' : marker.School_Typ
                 }`
             );
+=======
+        const pin = leaf.marker(coords, markerOptions(marker));
+>>>>>>> 50d46fb (markers)
 
         if (overlays.hasOwnProperty(type)) {
             overlays[type].push(pin);
@@ -285,6 +342,7 @@ function generateOverlays(collections) {
 }
 
 function markerOptions(marker) {
+<<<<<<< HEAD
     let mapMarker;
 
     switch (marker.School_Typ) {
@@ -319,6 +377,15 @@ function markerOptions(marker) {
 
 =======
 >>>>>>> 4660563 (hover interactivity)
+=======
+    console.log(marker);
+
+    return {
+        
+    }
+}
+
+>>>>>>> 50d46fb (markers)
 /**
  * Apply options to a geoJSON object.
  * @param {array} geojson
