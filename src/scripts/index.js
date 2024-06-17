@@ -165,7 +165,13 @@ function generateOverlays(collections) {
     markers.forEach((marker) => {
         const type = marker.School_Typ;
         const coords = marker.latlong.split(',');
-        const pin = leaf.marker(coords, markerOptions(marker));
+        const pin = leaf
+            .marker(coords, markerOptions(marker))
+            .bindTooltip(
+                `${marker.School_Nam} ${
+                    marker.School_Typ === 'Other' ? '' : marker.School_Typ
+                }`
+            );
 
         if (overlays.hasOwnProperty(type)) {
             overlays[type].push(pin);
@@ -204,8 +210,11 @@ function markerOptions(marker) {
         iconUrl: mapMarker,
         shadowUrl: markerShadow,
 
-        iconSize: [25, 41], // size of the icon
-        iconAnchor: [0, 41], // point of the icon which will correspond to marker's location
+        iconSize: [25, 35], // size of the icon
+        iconAnchor: [0, 35], // point of the icon which will correspond to marker's location
+        shadowAnchor: [0, 40],
+        popupAnchor: [0, 0],
+        tooltipAnchor: [0, 0],
     });
 
     return {
