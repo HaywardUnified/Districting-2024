@@ -23,6 +23,7 @@ module.exports = (env, argv) => {
                     type: 'asset/resource',
                 },
                 {
+<<<<<<< HEAD
 =======
         entry: './src/index.js',
 =======
@@ -32,6 +33,8 @@ module.exports = (env, argv) => {
             rules: [
                 {
 >>>>>>> a30a21f (init and map)
+=======
+>>>>>>> fffa552 (pins)
                     test: /\.css/,
                     use: [
                         production

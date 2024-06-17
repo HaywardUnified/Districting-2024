@@ -13,9 +13,12 @@ import greenMarker from '../style/icons/green_marker.png';
 import yellowMarker from '../style/icons/yellow_marker.png';
 import redMarker from '../style/icons/red_marker.png';
 import markerShadow from '../style/icons/marker-shadow.png';
+<<<<<<< HEAD
 =======
 import '../style/style.scss';
 >>>>>>> d537c09 (hover effects)
+=======
+>>>>>>> fffa552 (pins)
 import '../../node_modules/leaflet/dist/leaflet.css';
 
 import baseLayers from './baseLayers';
@@ -343,6 +346,9 @@ function generateOverlays(collections) {
 
 function markerOptions(marker) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fffa552 (pins)
     let mapMarker;
 
     switch (marker.School_Typ) {
@@ -363,6 +369,7 @@ function markerOptions(marker) {
         iconUrl: mapMarker,
         shadowUrl: markerShadow,
 
+<<<<<<< HEAD
         iconSize: [25, 35], // size of the icon
         iconAnchor: [0, 35], // point of the icon which will correspond to marker's location
         shadowAnchor: [0, 40],
@@ -379,10 +386,15 @@ function markerOptions(marker) {
 >>>>>>> 4660563 (hover interactivity)
 =======
     console.log(marker);
+=======
+        iconSize: [25, 41], // size of the icon
+        iconAnchor: [0, 41], // point of the icon which will correspond to marker's location
+    });
+>>>>>>> fffa552 (pins)
 
     return {
-        
-    }
+        icon: markerIcon,
+    };
 }
 
 >>>>>>> 50d46fb (markers)
