@@ -10,6 +10,10 @@ module.exports = (env, argv) => {
         module: {
             rules: [
                 {
+                    test: /\.(png|jpg|gif)$/i,
+                    type: 'asset/resource',
+                },
+                {
                     test: /\.css/,
                     use: [
                         production
