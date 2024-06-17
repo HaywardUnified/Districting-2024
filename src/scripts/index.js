@@ -6,21 +6,19 @@ import leaf from 'leaflet';
 
 const STARTING_COORDINATES = [37.63837551672515, -122.09706577524128];
 // Load and process data
-const geoFeatureCollections = loadFiles(); // All available geoJSON files
-const mapBaseOverlays = insertNoneLayer(
-    generateMapOverlays(geoFeatureCollections)
-);
+const mapBaseLayers = insertNoneLayer(generateMapLayers(loadBaseLayers()));
+const overlayCollection = generateOverlays(loadOverlays());
 
 // Load Map
 const map = leaf.map('map', {
     center: STARTING_COORDINATES,
-    layers: [baseLayers['Digital'], mapBaseOverlays['Draft A']],
+    layers: [baseLayers['Digital'], mapBaseLayers['Draft A']],
     zoom: 12,
 });
 
 // Insert map controls
-const baseLayerControls = createControls(baseLayers).setPosition('bottomleft');
-const mapOverlayControls = createControls(mapBaseOverlays, null, {
+const mapControls = createControls(baseLayers).setPosition('bottomleft');
+const baseLayerControls = createControls(mapBaseLayers, overlayCollection, {
     collapsed: false,
 }).setPosition('topleft');
 const hoverInfoBox = createHoverInfoBox().addTo(map);
@@ -59,14 +57,10 @@ function createHoverInfoBox() {
     </div>
 </div>`
                 : `<div>Hover over a region</div>`);
-
-        console.log(this._div);
     };
 
     return box;
 }
-
-console.log(geoFeatureCollections);
 
 /**
  * Create a control layer to store base layers and overlays.
@@ -82,8 +76,37 @@ function createControls(baseLayers, overlays, options) {
  * Load and convert .geojson files to geo Feature Collections
  * @returns - object containing geo feature collection
  */
-function loadFiles() {
-    const context = require.context('../datafiles/', true, /\.geojson$/);
+function loadBaseLayers() {
+    const context = require.context(
+        '../datafiles/baseLayers',
+        true,
+        /\.geojson$/
+    );
+    const files = [];
+
+    context.keys().forEach((key) => {
+        const formattedKey = key
+            .replace('./', '')
+            .replace(/\.(json|geojson)$/, '');
+
+        context(key).name = formattedKey; // Update name data
+
+        files.push(context(key));
+    });
+
+    return files;
+}
+
+/**
+ * Load and convert .geojson files to geo Feature Collections
+ * @returns - object containing geo feature collection
+ */
+function loadOverlays() {
+    const context = require.context(
+        '../datafiles/overlays',
+        true,
+        /\.geojson$/
+    );
     const files = [];
 
     context.keys().forEach((key) => {
@@ -109,7 +132,7 @@ function insertNoneLayer(collection) {
  * @param {*} collections - array of feature collections (each feature collection contains an array of features/layers)
  * @return - object containing geoJSON map overlays
  */
-function generateMapOverlays(collections) {
+function generateMapLayers(collections) {
     const overlays = {};
 
     collections.forEach((collection) => {
@@ -119,6 +142,48 @@ function generateMapOverlays(collections) {
     });
 
     return overlays;
+}
+
+function generateOverlays(collections) {
+    const markers = [];
+
+    // extract properties
+    collections.forEach((collection) => {
+        collection.features.forEach((feature) => {
+            markers.push(feature.properties);
+        });
+    });
+
+    const overlays = {};
+
+    // sort markers by school type and store them as markers
+    markers.forEach((marker) => {
+        const type = marker.School_Typ;
+        const coords = marker.latlong.split(',');
+        const pin = leaf.marker(coords, markerOptions(marker));
+
+        if (overlays.hasOwnProperty(type)) {
+            overlays[type].push(pin);
+        } else {
+            overlays[type] = [pin];
+        }
+    });
+
+    // group markers into layerGroups
+    Object.keys(overlays).forEach((key) => {
+        const layerGroup = leaf.layerGroup([...overlays[key]]);
+        overlays[key] = layerGroup;
+    });
+
+    return overlays;
+}
+
+function markerOptions(marker) {
+    console.log(marker);
+
+    return {
+        
+    }
 }
 
 /**
