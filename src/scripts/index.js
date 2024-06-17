@@ -317,6 +317,9 @@ function generateOverlays(collections) {
         const type = marker.School_Typ;
         const coords = marker.latlong.split(',');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a23b464 (pins and hover;)
         const pin = leaf
             .marker(coords, markerOptions(marker))
             .bindTooltip(
@@ -324,9 +327,12 @@ function generateOverlays(collections) {
                     marker.School_Typ === 'Other' ? '' : marker.School_Typ
                 }`
             );
+<<<<<<< HEAD
 =======
         const pin = leaf.marker(coords, markerOptions(marker));
 >>>>>>> 50d46fb (markers)
+=======
+>>>>>>> a23b464 (pins and hover;)
 
         if (overlays.hasOwnProperty(type)) {
             overlays[type].push(pin);
@@ -370,6 +376,9 @@ function markerOptions(marker) {
         shadowUrl: markerShadow,
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a23b464 (pins and hover;)
         iconSize: [25, 35], // size of the icon
         iconAnchor: [0, 35], // point of the icon which will correspond to marker's location
         shadowAnchor: [0, 40],
