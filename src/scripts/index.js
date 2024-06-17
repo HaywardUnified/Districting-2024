@@ -1,4 +1,9 @@
 import '../style/style.scss';
+import blueMarker from '../style/icons/blue_marker.png';
+import greenMarker from '../style/icons/green_marker.png';
+import yellowMarker from '../style/icons/yellow_marker.png';
+import redMarker from '../style/icons/red_marker.png';
+import markerShadow from '../style/icons/marker-shadow.png';
 import '../../node_modules/leaflet/dist/leaflet.css';
 
 import baseLayers from './baseLayers';
@@ -179,11 +184,33 @@ function generateOverlays(collections) {
 }
 
 function markerOptions(marker) {
-    console.log(marker);
+    let mapMarker;
+
+    switch (marker.School_Typ) {
+        case 'Elementary School':
+            mapMarker = greenMarker;
+            break;
+        case 'Middle School':
+            mapMarker = yellowMarker;
+            break;
+        case 'High School':
+            mapMarker = redMarker;
+            break;
+        case 'Other':
+            mapMarker = blueMarker;
+            break;
+    }
+    var markerIcon = L.icon({
+        iconUrl: mapMarker,
+        shadowUrl: markerShadow,
+
+        iconSize: [25, 41], // size of the icon
+        iconAnchor: [0, 41], // point of the icon which will correspond to marker's location
+    });
 
     return {
-        
-    }
+        icon: markerIcon,
+    };
 }
 
 /**
