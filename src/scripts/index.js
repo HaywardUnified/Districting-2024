@@ -53,6 +53,7 @@ const map = leaf.map('map', {
     center: STARTING_COORDINATES,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     layers: [baseLayers['Digital'], mapBaseLayers['Modified Final Map A']],
 =======
     layers: [baseLayers['Digital'], mapBaseOverlays['Draft A']],
@@ -60,6 +61,9 @@ const map = leaf.map('map', {
 =======
     layers: [baseLayers['Digital'], mapBaseLayers['Draft A']],
 >>>>>>> 50d46fb (markers)
+=======
+    layers: [baseLayers['Digital'], mapBaseLayers['Modified Final Map A']],
+>>>>>>> 271001e (modified maps)
     zoom: 12,
 });
 
@@ -542,6 +546,7 @@ function styleFeature(feature) {
     switch (feature.properties.DistrictName) {
         case 'A':
 <<<<<<< HEAD
+<<<<<<< HEAD
         case '1':
             color = '#003049';
             break;
@@ -560,19 +565,29 @@ function styleFeature(feature) {
         case 'E':
         case '5':
 =======
+=======
+        case '1':
+>>>>>>> 271001e (modified maps)
             color = '#003049';
             break;
         case 'B':
+        case '2':
             color = '#D62828';
             break;
         case 'C':
+        case '4':
             color = '#F77F00';
             break;
         case 'D':
+        case '3':
             color = '#0f7b0a';
             break;
         case 'E':
+<<<<<<< HEAD
 >>>>>>> 4660563 (hover interactivity)
+=======
+        case '5':
+>>>>>>> 271001e (modified maps)
             color = '#BC34E6';
             break;
     }
