@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b801a50 (instructions)
 /*
 
 New Map Instructions:
