@@ -17,7 +17,7 @@ const overlayCollection = generateOverlays(loadOverlays());
 // Load Map
 const map = leaf.map('map', {
     center: STARTING_COORDINATES,
-    layers: [baseLayers['Digital'], mapBaseLayers['Draft A']],
+    layers: [baseLayers['Digital'], mapBaseLayers['Modified Final Map A']],
     zoom: 12,
 });
 
@@ -284,18 +284,23 @@ function styleFeature(feature) {
 
     switch (feature.properties.DistrictName) {
         case 'A':
+        case '1':
             color = '#003049';
             break;
         case 'B':
+        case '2':
             color = '#D62828';
             break;
         case 'C':
+        case '4':
             color = '#F77F00';
             break;
         case 'D':
+        case '3':
             color = '#0f7b0a';
             break;
         case 'E':
+        case '5':
             color = '#BC34E6';
             break;
     }
