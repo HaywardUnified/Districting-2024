@@ -1,3 +1,11 @@
+/*
+
+New Map Instructions:
+When adding a new map to the baseLayers folder make sure to update the filename on line 26 (if the new file is the default layer).
+
+The same thing applies to renaming baseLayers, always make sure to update line 26 if the renamed file will serve as the default/pre-selected layer.
+
+*/
 import '../style/style.scss';
 import blueMarker from '../style/icons/blue_marker.png';
 import greenMarker from '../style/icons/green_marker.png';
