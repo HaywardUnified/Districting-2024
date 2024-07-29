@@ -1,11 +1,15 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+<<<<<<< HEAD
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+=======
+>>>>>>> a30a21f (init and map)
 const path = require('path');
 
 module.exports = (env, argv) => {
     const production = argv.mode === 'production';
 
     return {
+<<<<<<< HEAD
         entry: './src/scripts/index.js',
         module: {
             rules: [
@@ -14,6 +18,12 @@ module.exports = (env, argv) => {
                     type: 'asset/resource',
                 },
                 {
+=======
+        entry: './src/index.js',
+        module: {
+            rules: [
+                {
+>>>>>>> a30a21f (init and map)
                     test: /\.css/,
                     use: [
                         production
@@ -32,10 +42,13 @@ module.exports = (env, argv) => {
                         'sass-loader',
                     ],
                 },
+<<<<<<< HEAD
                 {
                     test: /\.(json|geojson)$/,
                     type: 'json',
                 },
+=======
+>>>>>>> a30a21f (init and map)
             ],
         },
         output: {
@@ -47,7 +60,10 @@ module.exports = (env, argv) => {
                 title: 'HUSD Districting Map Viewer',
                 template: './src/template.html',
             }),
+<<<<<<< HEAD
             new MiniCssExtractPlugin(),
+=======
+>>>>>>> a30a21f (init and map)
         ],
     };
 };
