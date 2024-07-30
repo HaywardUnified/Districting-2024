@@ -28,6 +28,18 @@ module.exports = (env, argv) => {
                         'sass-loader',
                     ],
                 },
+                {
+                    test: /\.(json|geojson)$/,
+                    type: 'json',
+                },
+                {
+                    test: /\.(png|jpe?g|gif)$/i,
+                    use: [
+                        {
+                            loader: 'file-loader',
+                        },
+                    ],
+                },
             ],
         },
         output: {
