@@ -5,15 +5,7 @@
     "main": "index.js",
     "scripts": {
         "code": "webpack --watch --mode development",
-<<<<<<< HEAD
-<<<<<<< HEAD
         "production": "webpack --mode production"
-=======
-        "production": "webpack --mode productin"
->>>>>>> a30a21f (init and map)
-=======
-        "production": "webpack --mode production"
->>>>>>> 2330c72 (map and region controls)
     },
     "repository": {
         "type": "git",
