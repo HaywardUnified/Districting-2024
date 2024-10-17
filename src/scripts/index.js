@@ -25,11 +25,7 @@ const overlayCollection = generateOverlays(loadOverlays());
 // Load Map
 const map = leaf.map('map', {
     center: STARTING_COORDINATES,
-<<<<<<< HEAD
-    layers: [baseLayers['Digital'], mapBaseLayers['Modified Final Map A']],
-=======
     layers: [baseLayers['Digital'], mapBaseLayers['Final Map A']],
->>>>>>> rebasing
     zoom: 12,
 });
 
