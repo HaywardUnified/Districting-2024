@@ -10,6 +10,10 @@ module.exports = (env, argv) => {
         module: {
             rules: [
                 {
+                    test: /\.(png|jpg|gif)$/i,
+                    type: 'asset/resource',
+                },
+                {
                     test: /\.css/,
                     use: [
                         production
@@ -31,14 +35,6 @@ module.exports = (env, argv) => {
                 {
                     test: /\.(json|geojson)$/,
                     type: 'json',
-                },
-                {
-                    test: /\.(png|jpe?g|gif)$/i,
-                    use: [
-                        {
-                            loader: 'file-loader',
-                        },
-                    ],
                 },
             ],
         },
