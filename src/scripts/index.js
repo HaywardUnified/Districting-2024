@@ -250,6 +250,10 @@ function applyFeatureOptions(geojson) {
                     content: feature.properties.DistrictName,
                     direction: 'center',
                     permanent: true,
+                    offset:
+                        feature.properties.DistrictName === '3'
+                            ? leaf.point(45, 5)
+                            : leaf.point(0, 0),
                 })
                 .openTooltip();
 
