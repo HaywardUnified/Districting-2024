@@ -1,7 +1,7 @@
 /*
 
 New Map Instructions:
-When adding a new map to the baseLayers folder make sure to update the filename on line 26 (if the new file is the default layer).
+When adding a new map to the baseLayers folder make sure to update the filename on the "map variable" (if the new file is the default layer).
 
 The same thing applies to renaming baseLayers, always make sure to update line 26 if the renamed file will serve as the default/pre-selected layer.
 
@@ -46,11 +46,10 @@ function createHoverInfoBox() {
     };
 
     box.update = function (props) {
-        this._div.innerHTML =
-            `<div class='title'>Regional Demographics</div>` +
-            (props
-                ? `
+        this._div.innerHTML = props
+            ? `
 <div class='data'>
+    <div class='title'>Regional Demographics</div>
     <div class='district'>District: ${props.DistrictName}</div>
     <div>Total Population: ${props['Population']}</div>
     <div class='population'>
@@ -69,7 +68,12 @@ function createHoverInfoBox() {
         </div>
     </div>
 </div>`
-                : `<div>Hover over a region</div>`);
+            : `
+                <div class='title'>Instructions</div>
+                <div>Hover over a region</div>
+                <div>OR</div>
+                <div>Zoom in to find your address</div>
+                `;
     };
 
     return box;
